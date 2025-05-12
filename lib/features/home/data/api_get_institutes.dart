@@ -1,4 +1,5 @@
 import 'package:controlpanel/core/error/failure.dart';
+import 'package:controlpanel/data.dart';
 import 'package:controlpanel/data/model/center.dart';
 import 'package:controlpanel/data/model/institute.dart';
 import 'package:dartz/dartz.dart';
@@ -21,18 +22,11 @@ class ApiGetInstitutes {
       //     ),
       //   );
 
-      await Future.delayed(Duration(seconds: 5));
+      await Future.delayed(Duration(seconds: 2));
 
-      final institute = Institute(
-        centers: [
-          CenterModel(name: 'mork', id: 1),
-          CenterModel(name: 'mork', id: 1),
-        ],
-        id: 1,
-        name: 'hama', location: 'homs',
-      );
+     
 
-      return right([institute]);
+      return right(institutes);
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioError(e));

@@ -1,4 +1,5 @@
 import 'package:controlpanel/core/error/failure.dart';
+import 'package:controlpanel/data.dart';
 import 'package:controlpanel/data/model/institute.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -10,6 +11,8 @@ class ApiAddInstitutes {
 
   Future<Either<Failure, String>> addInstitutes(Institute institute) async {
     try {
+      institutes.add(institute);
+
       await Future.delayed(Duration(seconds: 3));
       return right('Added successfully');
     } catch (e) {

@@ -12,6 +12,7 @@ class InstitustsBuilderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return BlocBuilder<InstitutesCubit, InstitutesState>(
       buildWhen:
           (previous, current) =>
