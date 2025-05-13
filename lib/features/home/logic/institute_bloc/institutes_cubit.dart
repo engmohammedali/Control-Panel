@@ -1,14 +1,14 @@
 import 'package:controlpanel/data/model/institute.dart';
-import 'package:controlpanel/features/home/data/api_add_institutes.dart';
+import 'package:controlpanel/features/home/data/api_add_institute.dart';
 import 'package:controlpanel/features/home/data/api_get_institutes.dart';
-import 'package:controlpanel/features/home/logic/institutes_bloc/institutes_state.dart';
+import 'package:controlpanel/features/home/logic/institute_bloc/institutes_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class InstitutesCubit extends Cubit<InstitutesState> {
   final ApiGetInstitutes _apiGetInstitutes;
-  final ApiAddInstitutes _apiAddInstitutes;
-  InstitutesCubit(this._apiGetInstitutes, this._apiAddInstitutes)
+  final ApiAddInstitute _apiAddInstitute;
+  InstitutesCubit(this._apiGetInstitutes, this._apiAddInstitute)
     : super(InstitutesFeathStateInitial());
 
   Future<void> feathInstitutesCubit() async {
@@ -24,9 +24,9 @@ class InstitutesCubit extends Cubit<InstitutesState> {
     );
   }
 
-  Future<void> addInstitutesCubit() async {
+  Future<void> addInstituteCubit() async {
     emit(InstitutesAddStateLoading());
-    final result = await _apiAddInstitutes.addInstitutes(
+    final result = await _apiAddInstitute.addInstitute(
       Institute(
         centers: [],
         id: 1,

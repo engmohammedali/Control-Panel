@@ -1,7 +1,9 @@
 import 'package:controlpanel/core/helpers/toast.dart';
+import 'package:controlpanel/core/routing/extension.dart';
+import 'package:controlpanel/core/routing/routes.dart';
 import 'package:controlpanel/data/model/institute.dart';
-import 'package:controlpanel/features/home/logic/institutes_bloc/institutes_cubit.dart';
-import 'package:controlpanel/features/home/logic/institutes_bloc/institutes_state.dart';
+import 'package:controlpanel/features/home/logic/institute_bloc/institutes_cubit.dart';
+import 'package:controlpanel/features/home/logic/institute_bloc/institutes_state.dart';
 import 'package:controlpanel/features/home/widgets/custom_institusts_widget.dart';
 import 'package:controlpanel/features/home/widgets/home_shimmer_loading.dart';
 import 'package:flutter/widgets.dart';
@@ -12,7 +14,6 @@ class InstitustsBuilderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return BlocBuilder<InstitutesCubit, InstitutesState>(
       buildWhen:
           (previous, current) =>
@@ -47,7 +48,12 @@ class InstitustsBuilderWidget extends StatelessWidget {
                 name: state.institutes[index].name,
                 location: state.institutes[index].location,
               ),
-              onTaped: () {},
+              onTaped: () {
+                context.pushNamed(
+                  Routes.centers,
+                  arguments: state.institutes[index].centers,
+                );
+              },
             ),
       ),
     );

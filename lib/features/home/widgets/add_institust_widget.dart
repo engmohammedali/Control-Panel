@@ -3,8 +3,8 @@ import 'package:controlpanel/core/theming/colors.dart';
 import 'package:controlpanel/core/theming/styles.dart';
 import 'package:controlpanel/core/widgets/app_text_button.dart';
 import 'package:controlpanel/core/widgets/app_text_form_field.dart';
-import 'package:controlpanel/features/home/logic/institutes_bloc/institutes_cubit.dart';
-import 'package:controlpanel/features/home/widgets/add_institusts_listener.dart';
+import 'package:controlpanel/features/home/logic/institute_bloc/institutes_cubit.dart';
+import 'package:controlpanel/features/home/widgets/add_institust_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,14 +19,14 @@ class AddInstitustsWidget extends StatefulWidget {
 class _AddInstitustsDailogState extends State<AddInstitustsWidget> {
   void validateThenDoAddInstitute(BuildContext context) {
     if (context.read<InstitutesCubit>().formkey.currentState!.validate()) {
-      context.read<InstitutesCubit>().addInstitutesCubit();
+      context.read<InstitutesCubit>().addInstituteCubit();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     double height = ScreenUtil().screenHeight;
-    return AddInstitustsListener(
+    return AddInstituteListener(
       child: Form(
         key: context.read<InstitutesCubit>().formkey,
         child: SingleChildScrollView(

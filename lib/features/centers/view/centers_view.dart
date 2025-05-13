@@ -1,20 +1,22 @@
 import 'package:controlpanel/core/theming/colors.dart';
-import 'package:controlpanel/features/home/logic/institute_bloc/institutes_cubit.dart';
-import 'package:controlpanel/features/home/widgets/add_institust_widget.dart';
-import 'package:controlpanel/features/home/widgets/institusts_builder_widget.dart';
+import 'package:controlpanel/data/model/center.dart';
+import 'package:controlpanel/features/centers/logic/center_cubit.dart';
+import 'package:controlpanel/features/centers/view/widgets/add_center_widget.dart';
+import 'package:controlpanel/features/centers/view/widgets/center_builder_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
-  void _addInstitute(BuildContext context) {
+class CentersView extends StatelessWidget {
+  final List<CenterModel> centers;
+  const CentersView({super.key, required this.centers});
+  void _addCenter(BuildContext context) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext bottomSheetContext) {
         return BlocProvider.value(
-          value: context.read<InstitutesCubit>(),
-          child: AddInstitustsWidget(),
+          value: context.read<CenterCubit>(),
+          child: AddCenterWidget(),
         );
       },
     );
@@ -26,11 +28,11 @@ class HomeView extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: ColorsManager.moreLighterGray,
         onPressed: () {
-          _addInstitute(context);
+          _addCenter(context);
         },
         icon: Icon(Icons.add, color: ColorsManager.mainBlue),
         label: Text(
-          'add Institute',
+          'add Center',
           style: TextStyle(color: ColorsManager.darkBlue),
         ),
       ),
@@ -41,7 +43,7 @@ class HomeView extends StatelessWidget {
         height: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
 
-        child: Column(children: [InstitustsBuilderWidget()]),
+        child: Column(children: [CenterBuilderWidget(centers: centers)]),
       ),
     );
   }

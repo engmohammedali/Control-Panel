@@ -1,15 +1,15 @@
 import 'package:controlpanel/core/theming/colors.dart';
 import 'package:controlpanel/core/theming/styles.dart';
-import 'package:controlpanel/data/model/institute.dart';
+import 'package:controlpanel/data/model/center.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomInstitustsWidget extends StatelessWidget {
-  final Institute institute;
+class CustomCenterWidget extends StatelessWidget {
+  final CenterModel center;
   final void Function()? onTaped;
-  const CustomInstitustsWidget({
+  const CustomCenterWidget({
     super.key,
-    required this.institute,
+    required this.center,
     required this.onTaped,
   });
 
@@ -23,7 +23,7 @@ class CustomInstitustsWidget extends StatelessWidget {
 
         width: double.infinity,
         child: GridTile(
-          header: Text(institute.name, style: TextStyles.font32BlueBold),
+          header: Text(center.name, style: TextStyles.font32BlueBold),
           child: Container(
             decoration: BoxDecoration(
               image: DecorationImage(image: AssetImage('assets/institust.png')),
