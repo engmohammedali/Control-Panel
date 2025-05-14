@@ -2,10 +2,10 @@ import 'package:controlpanel/core/helpers/toast.dart';
 import 'package:controlpanel/core/routing/extension.dart';
 import 'package:controlpanel/core/routing/routes.dart';
 import 'package:controlpanel/data/model/institute.dart';
-import 'package:controlpanel/features/home/logic/institute_bloc/institutes_cubit.dart';
-import 'package:controlpanel/features/home/logic/institute_bloc/institutes_state.dart';
-import 'package:controlpanel/features/home/widgets/custom_institusts_widget.dart';
-import 'package:controlpanel/features/home/widgets/home_shimmer_loading.dart';
+import 'package:controlpanel/features/home/logic/institutes_bloc/institutes_cubit.dart';
+import 'package:controlpanel/features/home/logic/institutes_bloc/institutes_state.dart';
+import 'package:controlpanel/features/home/view/widgets/custom_institusts_widget.dart';
+import 'package:controlpanel/features/home/view/widgets/home_shimmer_loading.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,29 +29,29 @@ class InstitustsBuilderWidget extends StatelessWidget {
           return setUpError(context, state.message);
         }
         if (state is InstitutesFeathStateSuccess) {
-          return setUpSuccess(state);
+          return setUpSuccess(state.institutes);
         }
         return const SizedBox.shrink();
       },
     );
   }
 
-  setUpSuccess(InstitutesFeathStateSuccess state) {
+  setUpSuccess(List<Institute> institutes) {
     return Flexible(
       child: ListView.builder(
-        itemCount: state.institutes.length,
+        itemCount: institutes.length,
         itemBuilder:
             (context, index) => CustomInstitustsWidget(
               institute: Institute(
-                centers: state.institutes[index].centers,
-                id: state.institutes[index].id,
-                name: state.institutes[index].name,
-                location: state.institutes[index].location,
+                centers: institutes[index].centers,
+                id: institutes[index].id,
+                name: institutes[index].name,
+                location: institutes[index].location,
               ),
               onTaped: () {
                 context.pushNamed(
                   Routes.centers,
-                  arguments: state.institutes[index].centers,
+                  arguments: institutes[index].centers,
                 );
               },
             ),
@@ -60,7 +60,10 @@ class InstitustsBuilderWidget extends StatelessWidget {
   }
 
   setUpError(BuildContext context, String message) {
-    Toast().error(context, message);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Toast().error(context, message);
+    });
+    return Text(message);
   }
 
   Widget setUpLoading() {

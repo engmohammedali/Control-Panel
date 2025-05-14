@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AddInstituteWidget extends StatefulWidget {
-  const AddInstituteWidget({super.key});
+class AddInstitustsWidget extends StatefulWidget {
+  const AddInstitustsWidget({super.key});
 
   @override
-  State<AddInstituteWidget> createState() => _AddInstituteDialogState();
+  State<AddInstitustsWidget> createState() => _AddInstitustsDailogState();
 }
 
-class _AddInstituteDialogState extends State<AddInstituteWidget> {
+class _AddInstitustsDailogState extends State<AddInstitustsWidget> {
   void validateThenDoAddInstitute(BuildContext context) {
     if (context.read<InstitutesCubit>().formkey.currentState!.validate()) {
       context.read<InstitutesCubit>().addInstituteCubit();

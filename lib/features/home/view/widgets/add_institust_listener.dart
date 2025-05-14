@@ -32,12 +32,11 @@ class AddInstituteListener extends StatelessWidget {
     );
   }
 
-    void _setApAddStateSuccess(BuildContext context, String message) {
+  void _setApAddStateSuccess(BuildContext context, String message) {
     Toast().success(context, message);
     context.read<InstitutesCubit>().feathInstitutesCubit();
     Navigator.pop(context);
   }
-
 
   void _setApAddStateSuccessFailure(BuildContext context, String message) {
     Toast().error(context, message);

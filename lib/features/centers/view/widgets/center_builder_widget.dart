@@ -1,9 +1,11 @@
+import 'package:controlpanel/core/helpers/extensions.dart';
 import 'package:controlpanel/core/helpers/toast.dart';
+import 'package:controlpanel/core/routing/routes.dart';
 import 'package:controlpanel/data/model/center.dart';
 import 'package:controlpanel/features/centers/logic/center_cubit.dart';
 import 'package:controlpanel/features/centers/logic/center_state.dart';
 import 'package:controlpanel/features/centers/view/widgets/custom_center.widget.dart';
-import 'package:controlpanel/features/home/widgets/home_shimmer_loading.dart';
+import 'package:controlpanel/features/home/view/widgets/home_shimmer_loading.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,7 +45,9 @@ class CenterBuilderWidget extends StatelessWidget {
                     id: centers[index].id,
                     name: centers[index].name,
                   ),
-                  onTaped: () {},
+                  onTaped: () {
+                    context.pushNamed(Routes.room, arguments: centers[index].room);
+                  },
                 ),
           ),
         );
@@ -61,7 +65,9 @@ class CenterBuilderWidget extends StatelessWidget {
                 id: centers[index].id,
                 name: centers[index].name,
               ),
-              onTaped: () {},
+              onTaped: () {
+                context.pushNamed(Routes.room, arguments: centers[index].room);
+              },
             ),
       ),
     );

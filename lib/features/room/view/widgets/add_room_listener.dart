@@ -1,30 +1,31 @@
 import 'package:controlpanel/core/helpers/toast.dart';
 import 'package:controlpanel/core/theming/colors.dart';
-import 'package:controlpanel/features/home/logic/institutes_bloc/institutes_cubit.dart';
-import 'package:controlpanel/features/home/logic/institutes_bloc/institutes_state.dart';
+import 'package:controlpanel/features/room/logic/classes_state.dart';
+import 'package:controlpanel/features/room/logic/room_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AddInstituteListener extends StatelessWidget {
+class AddRoomListener extends StatelessWidget {
   final Widget child;
-  const AddInstituteListener({super.key, required this.child});
+  const AddRoomListener({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<InstitutesCubit, InstitutesState>(
+    return BlocListener<RoomCubit, RoomState>(
       listenWhen:
           (previous, current) =>
               previous != current ||
-              current is InstitutesAddStateFailure ||
-              current is InstitutesAddStateSuccess,
+              current is RoomAddStateLoading ||
+              current is RoomAddStateSuccess ||
+              current is RoomAddStateFailure,
       listener: (context, state) {
-        if (state is InstitutesAddStateLoading) {
+        if (state is RoomAddStateLoading) {
           _setLoading(context);
         }
-        if (state is InstitutesAddStateFailure) {
+        if (state is RoomAddStateFailure) {
           return _setApAddStateSuccessFailure(context, state.message);
         }
-        if (state is InstitutesAddStateSuccess) {
+        if (state is RoomAddStateSuccess) {
           return _setApAddStateSuccess(context, state.message);
         }
       },
@@ -32,12 +33,11 @@ class AddInstituteListener extends StatelessWidget {
     );
   }
 
-    void _setApAddStateSuccess(BuildContext context, String message) {
+  void _setApAddStateSuccess(BuildContext context, String message) {
     Toast().success(context, message);
-    context.read<InstitutesCubit>().feathInstitutesCubit();
+    context.read<RoomCubit>().fetchRoomsCubit();
     Navigator.pop(context);
   }
-
 
   void _setApAddStateSuccessFailure(BuildContext context, String message) {
     Toast().error(context, message);

@@ -1,12 +1,8 @@
+import 'package:controlpanel/data/model/classes.dart';
+
 class Teacher {
-  final int id;
   final String name;
-  final int classId;
-  final String className;
-  Teacher({
-    required this.id,
-    required this.name,
-    required this.classId,
-    required this.className,
-  });
+
+  final Room room;
+  Teacher({required this.name, required this.room});
 }

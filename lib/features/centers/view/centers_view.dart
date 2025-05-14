@@ -37,7 +37,9 @@ class CentersView extends StatelessWidget {
         ),
       ),
 
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Center', style: TextStyle(color: ColorsManager.darkBlue)),
+      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,

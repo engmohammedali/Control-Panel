@@ -1,20 +1,22 @@
 import 'package:controlpanel/core/theming/colors.dart';
-import 'package:controlpanel/features/home/logic/institutes_bloc/institutes_cubit.dart';
-import 'package:controlpanel/features/home/view/widgets/add_institust_widget.dart';
-import 'package:controlpanel/features/home/view/widgets/institusts_builder_widget.dart';
+import 'package:controlpanel/data/model/stautant.dart';
+import 'package:controlpanel/features/stautant/logic/staudant_cubit.dart';
+import 'package:controlpanel/features/stautant/view/widgets/add_staudant_widget.dart';
+import 'package:controlpanel/features/stautant/view/widgets/staudant_builder_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
-  void _addInstitute(BuildContext context) {
+class StaudantView extends StatelessWidget {
+  final List<Staudant> students;
+  const StaudantView({super.key, required this.students});
+  void _addStudent(BuildContext context) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext bottomSheetContext) {
         return BlocProvider.value(
-          value: context.read<InstitutesCubit>(),
-          child: AddInstitustsWidget(),
+          value: context.read<StaudantCubit>(),
+          child: AddStaudantWidget(),
         );
       },
     );
@@ -26,26 +28,25 @@ class HomeView extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: ColorsManager.moreLighterGray,
         onPressed: () {
-          _addInstitute(context);
+          _addStudent(context);
         },
         icon: Icon(Icons.add, color: ColorsManager.mainBlue),
         label: Text(
-          'add Institute',
+          'add Student',
           style: TextStyle(color: ColorsManager.darkBlue),
         ),
       ),
-
       appBar: AppBar(
         title: Text(
-          'Institute',
+          ' Student',
           style: TextStyle(color: ColorsManager.darkBlue),
         ),
       ),
       body: Container(
         width: double.infinity,
-        height: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-        child: InstitustsBuilderWidget(),
+
+        child: StaudantBuilderWidget(students: students),
       ),
     );
   }

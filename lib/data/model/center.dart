@@ -1,5 +1,9 @@
+import 'package:controlpanel/data/model/classes.dart';
+
 class CenterModel {
   final int id;
   final String name;
-  CenterModel({required this.id, required this.name});
+  final Room? room;
+
+  CenterModel({required this.id, required this.name, this.room,});
 }

@@ -1,7 +1,7 @@
 import 'package:controlpanel/data/model/institute.dart';
 import 'package:controlpanel/features/home/data/api_add_institute.dart';
 import 'package:controlpanel/features/home/data/api_get_institutes.dart';
-import 'package:controlpanel/features/home/logic/institute_bloc/institutes_state.dart';
+import 'package:controlpanel/features/home/logic/institutes_bloc/institutes_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

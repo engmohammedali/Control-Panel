@@ -3,32 +3,32 @@ import 'package:controlpanel/core/theming/colors.dart';
 import 'package:controlpanel/core/theming/styles.dart';
 import 'package:controlpanel/core/widgets/app_text_button.dart';
 import 'package:controlpanel/core/widgets/app_text_form_field.dart';
-import 'package:controlpanel/features/home/logic/institute_bloc/institutes_cubit.dart';
-import 'package:controlpanel/features/home/widgets/add_institust_listener.dart';
+import 'package:controlpanel/features/stautant/logic/staudant_cubit.dart';
+import 'package:controlpanel/features/stautant/view/widgets/add_staudant_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AddInstitustsWidget extends StatefulWidget {
-  const AddInstitustsWidget({super.key});
+class AddStaudantWidget extends StatefulWidget {
+  const AddStaudantWidget({super.key});
 
   @override
-  State<AddInstitustsWidget> createState() => _AddInstitustsDailogState();
+  State<AddStaudantWidget> createState() => _AddStaudantWidgetState();
 }
 
-class _AddInstitustsDailogState extends State<AddInstitustsWidget> {
-  void validateThenDoAddInstitute(BuildContext context) {
-    if (context.read<InstitutesCubit>().formkey.currentState!.validate()) {
-      context.read<InstitutesCubit>().addInstituteCubit();
+class _AddStaudantWidgetState extends State<AddStaudantWidget> {
+  void validateThenDoAddStaudant(BuildContext context) {
+    if (context.read<StaudantCubit>().formkey.currentState!.validate()) {
+      context.read<StaudantCubit>().addStudentCubit();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     double height = ScreenUtil().screenHeight;
-    return AddInstituteListener(
+    return AddStaudantListener(
       child: Form(
-        key: context.read<InstitutesCubit>().formkey,
+        key: context.read<StaudantCubit>().formkey,
         child: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 20.w),
@@ -42,7 +42,6 @@ class _AddInstitustsDailogState extends State<AddInstitustsWidget> {
               children: [
                 Text('Name'),
                 AppTextFormField(
-                  
                   hintText: 'name',
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -50,30 +49,17 @@ class _AddInstitustsDailogState extends State<AddInstitustsWidget> {
                     }
                     return null;
                   },
-                  controller: context.read<InstitutesCubit>().name,
+                  controller: context.read<StaudantCubit>().name,
                 ),
-                Text('Location'),
-                AppTextFormField(
-                  controller: context.read<InstitutesCubit>().location,
 
-                  hintText: 'location',
-
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Location is required';
-                    }
-                    return null;
-                  },
-                ),
                 verticalspace(5),
                 AppTextButton(
-                  
                   buttonText: 'add',
                   textStyle: TextStyles.font18DarkBlueBold.copyWith(
                     color: ColorsManager.white,
                   ),
                   onPressed: () {
-                    validateThenDoAddInstitute(context);
+                    validateThenDoAddStaudant(context);
                   },
                 ),
               ],
