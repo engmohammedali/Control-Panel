@@ -1,17 +1,17 @@
 import 'package:controlpanel/core/helpers/extensions.dart';
 import 'package:controlpanel/core/helpers/toast.dart';
 import 'package:controlpanel/core/routing/routes.dart';
-import 'package:controlpanel/data/model/center.dart';
+import 'package:controlpanel/core/widgets/shimmer_loading.dart';
+import 'package:controlpanel/features/centers/data/model/center.dart';
 import 'package:controlpanel/features/centers/logic/center_cubit.dart';
 import 'package:controlpanel/features/centers/logic/center_state.dart';
 import 'package:controlpanel/features/centers/view/widgets/custom_center.widget.dart';
-import 'package:controlpanel/features/home/view/widgets/home_shimmer_loading.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CenterBuilderWidget extends StatelessWidget {
-  final List<CenterModel> centers;
-  const CenterBuilderWidget({super.key, required this.centers});
+  final int instituteId;
+  const CenterBuilderWidget({super.key, required this.instituteId});
 
   @override
   Widget build(BuildContext context) {
@@ -32,25 +32,8 @@ class CenterBuilderWidget extends StatelessWidget {
         if (state is CenterStateFeathSuccess) {
           return setUpSuccess(state.centers);
         }
-        if (centers.isEmpty) {
-          return const Center(child: Text('No Centers Found'));
-        }
 
-        return Flexible(
-          child: ListView.builder(
-            itemCount: centers.length,
-            itemBuilder:
-                (context, index) => CustomCenterWidget(
-                  center: CenterModel(
-                    id: centers[index].id,
-                    name: centers[index].name,
-                  ),
-                  onTaped: () {
-                    context.pushNamed(Routes.room, arguments: centers[index].room);
-                  },
-                ),
-          ),
-        );
+        return Center(child: Text('No Centers Found'));
       },
     );
   }
@@ -66,18 +49,25 @@ class CenterBuilderWidget extends StatelessWidget {
                 name: centers[index].name,
               ),
               onTaped: () {
-                context.pushNamed(Routes.room, arguments: centers[index].room);
+                context.pushNamed(
+                  Routes.room,
+                  arguments: [instituteId, centers[index].id],
+                );
               },
             ),
       ),
     );
   }
 
-  setUpError(BuildContext context, String message) {
-    Toast().error(context, message);
+  Widget setUpError(BuildContext context, String message) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Toast().error(context, message);
+    });
+
+    return Center(child: Text("Error $message"));
   }
 
   Widget setUpLoading() {
-    return HomeShimmerLoading();
+    return const ShimmerLoading();
   }
 }

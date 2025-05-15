@@ -1,5 +1,4 @@
 import 'package:controlpanel/core/theming/colors.dart';
-import 'package:controlpanel/data/model/center.dart';
 import 'package:controlpanel/features/centers/logic/center_cubit.dart';
 import 'package:controlpanel/features/centers/view/widgets/add_center_widget.dart';
 import 'package:controlpanel/features/centers/view/widgets/center_builder_widget.dart';
@@ -8,15 +7,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CentersView extends StatelessWidget {
-  final List<CenterModel> centers;
-  const CentersView({super.key, required this.centers});
+  final int instituteId;
+  const CentersView({
+    super.key,
+    required this.instituteId,
+  });
   void _addCenter(BuildContext context) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext bottomSheetContext) {
         return BlocProvider.value(
           value: context.read<CenterCubit>(),
-          child: AddCenterWidget(),
+          child: AddCenterWidget(
+            instituteId: instituteId,
+          ),
         );
       },
     );
@@ -45,7 +49,9 @@ class CentersView extends StatelessWidget {
         height: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
 
-        child: Column(children: [CenterBuilderWidget(centers: centers)]),
+        child: Column(
+          children: [CenterBuilderWidget(instituteId: instituteId)],
+        ),
       ),
     );
   }

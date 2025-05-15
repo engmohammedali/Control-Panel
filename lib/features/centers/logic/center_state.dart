@@ -1,4 +1,4 @@
-import 'package:controlpanel/data/model/center.dart';
+import 'package:controlpanel/features/centers/data/model/center.dart';
 
 sealed class CenterState {}
 final class CenterStateInitial extends CenterState {}

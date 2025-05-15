@@ -1,15 +1,13 @@
 import 'package:controlpanel/core/routing/routes.dart';
-import 'package:controlpanel/data/model/center.dart';
-import 'package:controlpanel/data/model/classes.dart';
-import 'package:controlpanel/data/model/stautant.dart';
+import 'package:controlpanel/features/Teachers/logic/teacher_cubit.dart';
 import 'package:controlpanel/features/centers/logic/center_cubit.dart';
 import 'package:controlpanel/features/centers/view/centers_view.dart';
-import 'package:controlpanel/features/home/logic/institutes_bloc/institutes_cubit.dart';
-import 'package:controlpanel/features/home/view/home_view.dart';
-import 'package:controlpanel/features/room/logic/room_cubit.dart';
-import 'package:controlpanel/features/room/view/rooms_view.dart';
-import 'package:controlpanel/features/stautant/logic/staudant_cubit.dart';
-import 'package:controlpanel/features/stautant/view/staudant_view.dart';
+import 'package:controlpanel/features/dashboard/logic/institutes_bloc/institutes_cubit.dart';
+import 'package:controlpanel/features/dashboard/view/dashborad_view.dart';
+import 'package:controlpanel/features/rooms/logic/room_cubit.dart';
+import 'package:controlpanel/features/rooms/view/rooms_view.dart';
+import 'package:controlpanel/features/students/logic/student_cubit.dart';
+import 'package:controlpanel/features/students/view/student_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,7 +25,7 @@ class AppRouter {
                 create:
                     (context) =>
                         getIt<InstitutesCubit>()..feathInstitutesCubit(),
-                child: const HomeView(),
+                child: const DashboardView(),
               ),
         );
 
@@ -35,8 +33,11 @@ class AppRouter {
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider(
-                create: (context) => getIt<CenterCubit>(),
-                child: CentersView(centers: arguments as List<CenterModel>),
+                create:
+                    (context) =>
+                        getIt<CenterCubit>()
+                          ..fetchCentersCubit(arguments as int),
+                child: CentersView(instituteId: arguments as int),
               ),
         );
 
@@ -44,18 +45,54 @@ class AppRouter {
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider(
-                create: (context) => getIt<RoomCubit>(),
-                child: RoomsView(room: arguments as Room),
+                create:
+                    (context) =>
+                        getIt<RoomCubit>()..fetchRoomsCubit(
+                          instituteId: (arguments as List<dynamic>)[0] as int,
+
+                          centerId: (arguments as List<dynamic>)[1] as int,
+                        ),
+                child: RoomsView(
+                  instituteId: (arguments as List<dynamic>)[0] as int,
+                  centerId: (arguments as List<dynamic>)[1] as int,
+                ),
               ),
         );
 
-      case Routes.staudant:
+      case Routes.student:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<StaudantCubit>(),
-            child: StaudantView(students: arguments as List<Staudant>),
-          ),
-        );  
+          builder:
+              (_) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) =>
+                            getIt<StudentCubit>()..fetchStudentsCubit(
+                              instituteId:
+                                  (arguments as List<dynamic>)[0] as int,
+                              centerId: (arguments as List<dynamic>)[1] as int,
+                              roomId: (arguments as List<dynamic>)[2] as int,
+                            ),
+                  ),
+
+                  BlocProvider(
+                    create:
+                        (context) =>
+                            getIt<TeacherCubit>()..fetchTeachersCubit(
+                              instituteId:
+                                  (arguments as List<dynamic>)[0] as int,
+                              centerId: (arguments as List<dynamic>)[1] as int,
+                              roomId: (arguments as List<dynamic>)[2] as int,
+                            ),
+                  ),
+                ],
+                child: StudentView(
+                  instituteId: (arguments as List<dynamic>)[0] as int,
+                  centerId: (arguments as List<dynamic>)[1] as int,
+                  roomId: (arguments as List<dynamic>)[2] as int,
+                ),
+              ),
+        );
       default:
         return null;
     }

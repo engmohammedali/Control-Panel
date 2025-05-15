@@ -7,7 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddCenterListener extends StatelessWidget {
   final Widget child;
-  const AddCenterListener({super.key, required this.child});
+  final int instituteId;
+  const AddCenterListener({
+    super.key,
+    required this.child,
+    required this.instituteId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +40,7 @@ class AddCenterListener extends StatelessWidget {
 
   void _setApAddStateSuccess(BuildContext context, String message) {
     Toast().success(context, message);
-    context.read<CenterCubit>().fetchCenterCubit();
+    context.read<CenterCubit>().fetchCentersCubit(instituteId);
     Navigator.pop(context);
   }
 

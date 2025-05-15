@@ -10,7 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddCenterWidget extends StatefulWidget {
-  const AddCenterWidget({super.key});
+  final int instituteId;
+  const AddCenterWidget({super.key, required this.instituteId});
 
   @override
   State<AddCenterWidget> createState() => _AddCenterWidgetState();
@@ -19,7 +20,7 @@ class AddCenterWidget extends StatefulWidget {
 class _AddCenterWidgetState extends State<AddCenterWidget> {
   void validateThenDoAddCenter(BuildContext context) {
     if (context.read<CenterCubit>().formkey.currentState!.validate()) {
-      context.read<CenterCubit>().addCenterCubit();
+      context.read<CenterCubit>().addCenterCubit(widget.instituteId);
     }
   }
 
@@ -27,6 +28,7 @@ class _AddCenterWidgetState extends State<AddCenterWidget> {
   Widget build(BuildContext context) {
     double height = ScreenUtil().screenHeight;
     return AddCenterListener(
+      instituteId: widget.instituteId,
       child: Form(
         key: context.read<CenterCubit>().formkey,
         child: SingleChildScrollView(

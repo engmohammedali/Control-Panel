@@ -1,6 +1,6 @@
 import 'package:controlpanel/core/theming/colors.dart';
 import 'package:controlpanel/core/theming/styles.dart';
-import 'package:controlpanel/data/model/center.dart';
+import 'package:controlpanel/features/centers/data/model/center.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,19 +18,48 @@ class CustomCenterWidget extends StatelessWidget {
     return InkWell(
       onTap: onTaped,
       child: Container(
-        height: 200.h,
+        margin: EdgeInsets.only(bottom: 12.h),
+        decoration: BoxDecoration(
+          color: ColorsManager.white,
+          borderRadius: BorderRadius.circular(12.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 6,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        height: 150.h,
         padding: EdgeInsets.all(10),
 
         width: double.infinity,
-        child: GridTile(
-          header: Text(center.name, style: TextStyles.font32BlueBold),
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage('assets/institust.png')),
-              color: ColorsManager.lightBlue,
-              borderRadius: BorderRadius.circular(12),
+        child: Row(
+          children: [
+            Icon(Icons.home_filled, color: ColorsManager.mainBlue, size: 28.sp),
+            SizedBox(width: 8.w),
+            Expanded(
+              child: Text(
+                "Center : ${center.name}",
+                style: TextStyles.font18DarkBlueBold,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-          ),
+
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: onTaped,
+                icon: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 18.sp,
+                  color: ColorsManager.mainBlue,
+                ),
+                tooltip: 'View Details',
+              ),
+            ),
+          ],
         ),
       ),
     );

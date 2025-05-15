@@ -1,16 +1,19 @@
 import 'package:controlpanel/core/networking/dio_factory.dart';
+import 'package:controlpanel/features/Teachers/data/api_add_teacher.dart';
+import 'package:controlpanel/features/Teachers/data/api_get_teacher.dart';
+import 'package:controlpanel/features/Teachers/logic/teacher_cubit.dart';
 import 'package:controlpanel/features/centers/data/api_add_center.dart';
 import 'package:controlpanel/features/centers/data/api_get_center.dart';
 import 'package:controlpanel/features/centers/logic/center_cubit.dart';
-import 'package:controlpanel/features/home/data/api_add_institute.dart';
-import 'package:controlpanel/features/home/data/api_get_institutes.dart';
-import 'package:controlpanel/features/home/logic/institutes_bloc/institutes_cubit.dart';
-import 'package:controlpanel/features/room/data/api_add_room.dart';
-import 'package:controlpanel/features/room/data/api_get_rooms.dart';
-import 'package:controlpanel/features/room/logic/room_cubit.dart';
-import 'package:controlpanel/features/stautant/data/api_add_staudant.dart';
-import 'package:controlpanel/features/stautant/data/api_get_staudant.dart';
-import 'package:controlpanel/features/stautant/logic/staudant_cubit.dart';
+import 'package:controlpanel/features/dashboard/data/api_add_institute.dart';
+import 'package:controlpanel/features/dashboard/data/api_get_institutes.dart';
+import 'package:controlpanel/features/dashboard/logic/institutes_bloc/institutes_cubit.dart';
+import 'package:controlpanel/features/rooms/data/api_add_room.dart';
+import 'package:controlpanel/features/rooms/data/api_get_rooms.dart';
+import 'package:controlpanel/features/rooms/logic/room_cubit.dart';
+import 'package:controlpanel/features/students/data/api_add_student.dart';
+import 'package:controlpanel/features/students/data/api_get_student.dart';
+import 'package:controlpanel/features/students/logic/student_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -20,7 +23,7 @@ class ServicesLocator {
     _setupHome();
     _setUpCenter();
     _setUpRoom();
-    _setUpStaudant();
+    _setUpStudentAndTeacher();
   }
 
   _setupHome() {
@@ -58,11 +61,12 @@ class ServicesLocator {
     getIt.registerLazySingleton<ApiAddRoom>(
       () => ApiAddRoom(dio: DioFactory.getDio()),
     );
-  } 
+  }
 
+  _setUpStudentAndTeacher() {
+    getIt.registerFactory(() => StudentCubit(getIt(), getIt()));
 
-  _setUpStaudant() {
-    getIt.registerFactory(() => StaudantCubit(getIt(), getIt()));
+    getIt.registerFactory(() => TeacherCubit(getIt(), getIt()));
     getIt.registerLazySingleton<ApiGetStudent>(
       () => ApiGetStudent(dio: DioFactory.getDio()),
     );
@@ -70,6 +74,15 @@ class ServicesLocator {
     getIt.registerLazySingleton<ApiAddStudent>(
       () => ApiAddStudent(dio: DioFactory.getDio()),
     );
-  }
 
+    getIt.registerLazySingleton<ApiAddTeacher>(
+      () => ApiAddTeacher(dio: DioFactory.getDio()),
+    );
+
+    getIt.registerLazySingleton<ApiGetTeacher>(
+      () => ApiGetTeacher(dio: DioFactory.getDio()),
+    );
+
+    // getIt.registerLazySingleton<ApiGetStudent>(
+  }
 }

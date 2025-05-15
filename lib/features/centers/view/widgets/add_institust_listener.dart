@@ -1,7 +1,7 @@
 import 'package:controlpanel/core/helpers/toast.dart';
 import 'package:controlpanel/core/theming/colors.dart';
-import 'package:controlpanel/features/home/logic/institutes_bloc/institutes_cubit.dart';
-import 'package:controlpanel/features/home/logic/institutes_bloc/institutes_state.dart';
+import 'package:controlpanel/features/dashboard/logic/institutes_bloc/institutes_cubit.dart';
+import 'package:controlpanel/features/dashboard/logic/institutes_bloc/institutes_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
