@@ -40,23 +40,25 @@ class InstitustsBuilderWidget extends StatelessWidget {
     if (institutes.isEmpty) {
       return const Center(child: Text("No institutes found"));
     }
-    return ListView.builder(
-      itemCount: institutes.length,
-      itemBuilder:
-          (context, index) => CustomInstitustsWidget(
-            institute: Institute(
-              centers: institutes[index].centers,
-              id: institutes[index].id,
-              name: institutes[index].name,
-              location: institutes[index].location,
+    return Flexible(
+      child: ListView.builder(
+        itemCount: institutes.length,
+        itemBuilder:
+            (context, index) => CustomInstitustsWidget(
+              institute: Institute(
+                centers: institutes[index].centers,
+                id: institutes[index].id,
+                name: institutes[index].name,
+                location: institutes[index].location,
+              ),
+              onTaped: () {
+                context.pushNamed(
+                  Routes.centers,
+                  arguments: institutes[index].id,
+                );
+              },
             ),
-            onTaped: () {
-              context.pushNamed(
-                Routes.centers,
-                arguments: institutes[index].id,
-              );
-            },
-          ),
+      ),
     );
   }
 

@@ -54,7 +54,7 @@ class _AddInstitustsDialogState extends State<AddInstitustsWidget> {
                 hintText: 'location',
                 validator: _requiredValidator('Location'),
               ),
-              verticalspace(10),
+              verticalspace(15),
               AppTextButton(
                 buttonText: 'add',
                 textStyle: TextStyles.font18DarkBlueBold.copyWith(

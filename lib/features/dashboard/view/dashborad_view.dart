@@ -45,7 +45,7 @@ class DashboardView extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-        child: InstitustsBuilderWidget(),
+        child: Column(children: [InstitustsBuilderWidget()]),
       ),
     );
   }
