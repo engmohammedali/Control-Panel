@@ -1,18 +1,19 @@
 import 'package:controlpanel/core/error/failure.dart';
 import 'package:controlpanel/data.dart';
 import 'package:controlpanel/features/rooms/data/model/room.dart';
+import 'package:controlpanel/features/students/data/model/student.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-class ApiAddRoom {
+class ApiAddStudent {
   final Dio _dio;
 
-  ApiAddRoom({required Dio dio}) : _dio = dio;
+  ApiAddStudent({required Dio dio}) : _dio = dio;
 
-  Future<Either<Failure, String>> addRoom({
+  Future<Either<Failure, String>> addStudent({
+    required Student student,
     required int instituteId,
     required int centerId,
-    required Room room,
   }) async {
     try {
       final institute = institutes.firstWhere(
@@ -21,8 +22,11 @@ class ApiAddRoom {
       final center = institute.centers.firstWhere(
         (element) => element.id == centerId,
       );
-      center.rooms ??= [];
-      center.rooms!.add(room);
+
+      final Room room = center.rooms!.firstWhere(
+        (element) => element.id == student.roomId,
+      );
+      room.students!.add(student);
 
       await Future.delayed(Duration(seconds: 1));
       return right('Added successfully');

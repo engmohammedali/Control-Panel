@@ -8,6 +8,12 @@ import 'package:controlpanel/features/centers/logic/center_cubit.dart';
 import 'package:controlpanel/features/dashboard/data/api_add_institute.dart';
 import 'package:controlpanel/features/dashboard/data/api_get_institutes.dart';
 import 'package:controlpanel/features/dashboard/logic/institutes_bloc/institutes_cubit.dart';
+import 'package:controlpanel/features/exercieses/data/api_add_exercies.dart';
+import 'package:controlpanel/features/exercieses/data/api_get_exercies.dart';
+import 'package:controlpanel/features/exercieses/logic/exercies_cubit.dart';
+import 'package:controlpanel/features/lessons/data/api_add_lesson.dart';
+import 'package:controlpanel/features/lessons/data/api_get_lessons.dart';
+import 'package:controlpanel/features/lessons/logic/lesson_cubit.dart';
 import 'package:controlpanel/features/rooms/data/api_add_room.dart';
 import 'package:controlpanel/features/rooms/data/api_get_rooms.dart';
 import 'package:controlpanel/features/rooms/logic/room_cubit.dart';
@@ -24,6 +30,7 @@ class ServicesLocator {
     _setUpCenter();
     _setUpRoom();
     _setUpStudentAndTeacher();
+    _setUpExercies();
   }
 
   _setupHome() {
@@ -66,6 +73,8 @@ class ServicesLocator {
   _setUpStudentAndTeacher() {
     getIt.registerFactory(() => StudentCubit(getIt(), getIt()));
 
+    getIt.registerFactory(() => LessonCubit(getIt(), getIt()));
+
     getIt.registerFactory(() => TeacherCubit(getIt(), getIt()));
     getIt.registerLazySingleton<ApiGetStudent>(
       () => ApiGetStudent(dio: DioFactory.getDio()),
@@ -83,6 +92,27 @@ class ServicesLocator {
       () => ApiGetTeacher(dio: DioFactory.getDio()),
     );
 
+    getIt.registerLazySingleton<ApiAddLesson>(
+      () => ApiAddLesson(dio: DioFactory.getDio()),
+    );
+
+    getIt.registerLazySingleton<ApiGetLessons>(
+      () => ApiGetLessons(dio: DioFactory.getDio()),
+    );
+
     // getIt.registerLazySingleton<ApiGetStudent>(
+  }
+
+  _setUpExercies() {
+    // bloc
+    getIt.registerFactory(() => ExerciesCubit(getIt(), getIt()));
+    // api
+    getIt.registerLazySingleton<ApiGetExercies>(
+      () => ApiGetExercies(dio: DioFactory.getDio()),
+    );
+
+    getIt.registerLazySingleton<ApiAddExercies>(
+      () => ApiAddExercies(dio: DioFactory.getDio()),
+    );
   }
 }

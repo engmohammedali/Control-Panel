@@ -75,41 +75,6 @@ class CustomInstitustsWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10.h),
-                    Text('Lessons:', style: TextStyles.font14DarkBlueMedium),
-                    SizedBox(height: 6.h),
-                    ...institute.lessons
-                        .take(5)
-                        .map(
-                          (lesson) => Padding(
-                            padding: EdgeInsets.only(bottom: 4.h),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.book,
-                                  size: 14.sp,
-                                  color: Colors.grey,
-                                ),
-                                SizedBox(width: 5.w),
-                                Expanded(
-                                  child: Text(
-                                    lesson.title,
-                                    style: TextStyles.font13DarkBlueMedium,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                        .toList(),
-                    if (institute.lessons.length > 5)
-                      Text(
-                        '+${institute.lessons.length - 5} more',
-                        style: TextStyles.font13DarkBlueMedium.copyWith(
-                          color: Colors.grey,
-                        ),
-                      ),
 
                     Align(
                       alignment: Alignment.centerRight,

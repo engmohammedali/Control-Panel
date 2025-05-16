@@ -1,7 +1,6 @@
 import 'package:controlpanel/features/centers/data/model/center.dart';
 
 sealed class CenterState {}
-final class CenterStateInitial extends CenterState {}
 final class CenterStateFeathInitial extends CenterState {}
 final class CenterStateFeathLoading extends CenterState {}
 final class CenterStateFeathFailure extends CenterState {

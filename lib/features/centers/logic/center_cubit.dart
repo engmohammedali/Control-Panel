@@ -9,7 +9,8 @@ class CenterCubit extends Cubit<CenterState> {
   final ApiAddCenter _addCenter;
   final ApiGetCenter _getCenter;
 
-  CenterCubit(this._addCenter, this._getCenter) : super(CenterStateInitial());
+  CenterCubit(this._addCenter, this._getCenter)
+    : super(CenterStateFeathInitial());
 
   Future<void> fetchCentersCubit(int instituteId) async {
     emit(CenterStateFeathLoading());

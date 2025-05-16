@@ -49,7 +49,6 @@ class InstitustsBuilderWidget extends StatelessWidget {
               id: institutes[index].id,
               name: institutes[index].name,
               location: institutes[index].location,
-              lessons: institutes[index].lessons,
             ),
             onTaped: () {
               context.pushNamed(

@@ -50,7 +50,7 @@ class CenterBuilderWidget extends StatelessWidget {
               ),
               onTaped: () {
                 context.pushNamed(
-                  Routes.room,
+                  Routes.rooms,
                   arguments: [instituteId, centers[index].id],
                 );
               },

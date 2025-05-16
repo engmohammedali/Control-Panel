@@ -2,6 +2,9 @@ import 'package:controlpanel/core/theming/colors.dart';
 import 'package:controlpanel/features/Teachers/logic/teacher_cubit.dart';
 import 'package:controlpanel/features/Teachers/view/widgets/add_teacher_widget.dart';
 import 'package:controlpanel/features/Teachers/view/widgets/teacher_builder_widget.dart';
+import 'package:controlpanel/features/lessons/logic/lesson_cubit.dart';
+import 'package:controlpanel/features/lessons/view/widgets/add_lesson_widget.dart';
+import 'package:controlpanel/features/lessons/view/widgets/lesson_builder_widget.dart';
 import 'package:controlpanel/features/students/logic/student_cubit.dart';
 import 'package:controlpanel/features/students/view/widgets/add_student_widget.dart';
 import 'package:controlpanel/features/students/view/widgets/student_builder_widget.dart';
@@ -51,6 +54,22 @@ class StudentView extends StatelessWidget {
     );
   }
 
+  void _addLesson(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext bottomSheetContext) {
+        return BlocProvider.value(
+          value: context.read<LessonCubit>(),
+          child: AddLessonWidget(
+            instituteId: instituteId,
+            centerId: centerId,
+            roomId: roomId,
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +88,6 @@ class StudentView extends StatelessWidget {
               style: TextStyle(color: ColorsManager.darkBlue),
             ),
           ),
-
           FloatingActionButton.extended(
             backgroundColor: ColorsManager.moreLighterGray,
             onPressed: () {
@@ -78,6 +96,18 @@ class StudentView extends StatelessWidget {
             icon: Icon(Icons.add, color: ColorsManager.mainBlue),
             label: Text(
               'add Student',
+              style: TextStyle(color: ColorsManager.darkBlue),
+            ),
+          ),
+
+          FloatingActionButton.extended(
+            backgroundColor: ColorsManager.moreLighterGray,
+            onPressed: () {
+              _addLesson(context);
+            },
+            icon: Icon(Icons.add, color: ColorsManager.mainBlue),
+            label: Text(
+              'add Lesson',
               style: TextStyle(color: ColorsManager.darkBlue),
             ),
           ),
@@ -96,9 +126,17 @@ class StudentView extends StatelessWidget {
         child: Column(
           spacing: 20.h,
           children: [
-            TeacherBuilderWidget(),
+            Flexible(child: TeacherBuilderWidget()),
             Divider(color: ColorsManager.darkBlue, thickness: 1),
-            StudentBuilderWidget(),
+            Flexible(
+              child: LessonBuilderWidget(
+                instituteId: instituteId,
+                centerId: centerId,
+                roomId: roomId,
+              ),
+            ),
+            Divider(color: ColorsManager.darkBlue, thickness: 1),
+            Flexible(child: StudentBuilderWidget()),
           ],
         ),
       ),

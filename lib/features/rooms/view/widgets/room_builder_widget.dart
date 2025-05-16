@@ -59,7 +59,7 @@ class RoomBuilderWidget extends StatelessWidget {
             room: room,
             onTaped: () {
               context.pushNamed(
-                Routes.student,
+                Routes.students,
                 arguments: [instituteId, centerId, room.id],
               );
             },

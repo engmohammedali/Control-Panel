@@ -1,7 +1,8 @@
 import 'package:controlpanel/features/Teachers/data/model/teacher.dart';
 import 'package:controlpanel/features/centers/data/model/center.dart';
 import 'package:controlpanel/features/dashboard/data/model/institute.dart';
-import 'package:controlpanel/features/dashboard/data/model/lesson.dart';
+import 'package:controlpanel/features/exercieses/data/model/exercies.dart';
+import 'package:controlpanel/features/lessons/data/model/lesson.dart';
 import 'package:controlpanel/features/rooms/data/model/room.dart';
 import 'package:controlpanel/features/students/data/model/student.dart';
 
@@ -17,20 +18,43 @@ late final List<Room> rooms;
 late final List<Lesson> lessons;
 
 void initializeData() {
-  final lesson1 = Lesson(id: 1, description: 'description', title: 'title1');
+  final Exercies exercies1 = Exercies(
+    id: Exercies.nextId,
+    title: 'exercies 1',
+    description: 'description 1',
+  );
+  final Exercies exercies2 = Exercies(
+    id: Exercies.nextId,
+    title: 'exercies 2',
+    description: 'description 2',
+  );
 
-  final lesson2 = Lesson(id: 2, description: 'description', title: 'title2');
+  final lesson1 = Lesson(
+    id: Lesson.nextId,
+    description: 'description',
+    title: 'title1',
+    exercieses: [exercies1, exercies2],
+  );
+
+  final lesson2 = Lesson(
+    id: Lesson.nextId,
+    description: 'description',
+    title: 'title2',
+    exercieses: [exercies1, exercies2],
+  );
 
   final Lesson lesson3 = Lesson(
-    id: 3,
+    id: Lesson.nextId,
     description: 'description',
     title: 'title3',
+    exercieses: [],
   );
 
   final Lesson lesson4 = Lesson(
-    id: 4,
+    id: Lesson.nextId,
     description: 'description',
     title: 'title4',
+    exercieses: [],
   );
 
   lessons = [lesson1, lesson2, lesson3, lesson4];
@@ -89,6 +113,7 @@ void initializeData() {
   );
 
   room1Instance.teacher = teacher1;
+  room1Instance.lessons = [lesson1, lesson2];
   room2Instance.teacher = teacher2;
 
   centers = [
@@ -102,10 +127,9 @@ void initializeData() {
       id: Institute.nextId,
       name: 'hama',
       location: 'homs',
-      lessons: lessons,
     ),
   ];
 
   teachers = [teacher1, teacher2];
-  rooms = [room1Instance, room2Instance];
+  rooms = [room1Instance];
 }

@@ -5,7 +5,6 @@ import 'package:controlpanel/core/widgets/app_text_button.dart';
 import 'package:controlpanel/core/widgets/app_text_form_field.dart';
 import 'package:controlpanel/features/dashboard/logic/institutes_bloc/institutes_cubit.dart';
 import 'package:controlpanel/features/dashboard/view/widgets/add_institust_listener.dart';
-import 'package:controlpanel/features/dashboard/view/widgets/lesson_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -54,32 +53,6 @@ class _AddInstitustsDialogState extends State<AddInstitustsWidget> {
                 controller: cubit.location,
                 hintText: 'location',
                 validator: _requiredValidator('Location'),
-              ),
-              verticalspace(15),
-              LessonFields(
-                lessonNumber: 1,
-                lessonController: cubit.lesson1,
-                descriptionController: cubit.description1,
-              ),
-              LessonFields(
-                lessonNumber: 2,
-                lessonController: cubit.lesson2,
-                descriptionController: cubit.description2,
-              ),
-              LessonFields(
-                lessonNumber: 3,
-                lessonController: cubit.lesson3,
-                descriptionController: cubit.description3,
-              ),
-              LessonFields(
-                lessonNumber: 4,
-                lessonController: cubit.lesson4,
-                descriptionController: cubit.description4, // تم تصحيحها
-              ),
-              LessonFields(
-                lessonNumber: 5,
-                lessonController: cubit.lesson5,
-                descriptionController: cubit.description5,
               ),
               verticalspace(10),
               AppTextButton(

@@ -1,9 +1,9 @@
 class Routes {
-  static const String home = '/home'; 
-  static const String room = '/room';
+  static const String dashboard = '/dashboard';
+  static const String rooms = '/rooms';
   static const String centers = '/centers';
-  static const String student = '/student';
-  static const String teacher = '/teacher';
-
-
+  static const String students = '/students';
+  static const String teachers = '/teachers';
+  static const String lessons = '/lessons';
+  static const String lessonDetails = '/lessonDetails';
 }

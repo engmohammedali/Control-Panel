@@ -1,24 +1,24 @@
 import 'package:controlpanel/core/helpers/space_helper.dart';
 import 'package:controlpanel/core/theming/colors.dart';
 import 'package:controlpanel/core/theming/styles.dart';
-import 'package:controlpanel/features/Teachers/data/model/teacher.dart';
+import 'package:controlpanel/features/exercieses/data/model/exercies.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomTeacherWidget extends StatelessWidget {
-  final Teacher teacher;
-  final void Function()? onTaped;
+class CustomExerciesWidget extends StatelessWidget {
+  final Exercies exercies;
+  final void Function()? onTapped;
 
-  const CustomTeacherWidget({
+  const CustomExerciesWidget({
     super.key,
-    required this.teacher,
-    required this.onTaped,
+    required this.exercies,
+    required this.onTapped,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTaped,
+      onTap: onTapped,
       child: Container(
         height: 150.h,
         padding: EdgeInsets.all(10),
@@ -30,16 +30,7 @@ class CustomTeacherWidget extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Row(
-              
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image.network(
-                    teacher.img ?? 'assets/imgs/profile.png',
-                    width: 75.w,
-                    height: 75.h,
-                  ),
-                ),
                 verticalspace(10),
                 Expanded(
                   child: Column(
@@ -47,7 +38,13 @@ class CustomTeacherWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Teacher: ${teacher.name}",
+                        "Exercies: ${exercies.title}",
+                        style: TextStyles.font18WhiteMedium.copyWith(
+                          color: ColorsManager.darkBlue,
+                        ),
+                      ),
+                      Text(
+                        "Description: ${exercies.description}",
                         style: TextStyles.font18WhiteMedium.copyWith(
                           color: ColorsManager.darkBlue,
                         ),

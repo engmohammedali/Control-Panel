@@ -1,5 +1,3 @@
-
-
 import 'package:controlpanel/core/error/failure.dart';
 import 'package:controlpanel/data.dart';
 import 'package:controlpanel/features/rooms/data/model/room.dart';
@@ -28,6 +26,7 @@ class ApiAddStudent {
       final Room room = center.rooms!.firstWhere(
         (element) => element.id == student.roomId,
       );
+      room.students ??= [];
       room.students!.add(student);
 
       await Future.delayed(Duration(seconds: 3));
