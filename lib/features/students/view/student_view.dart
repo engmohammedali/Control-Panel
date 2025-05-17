@@ -78,6 +78,7 @@ class StudentView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton.extended(
+            heroTag: 'addTeacher',
             backgroundColor: ColorsManager.moreLighterGray,
             onPressed: () {
               _addTeacher(context);
@@ -89,6 +90,7 @@ class StudentView extends StatelessWidget {
             ),
           ),
           FloatingActionButton.extended(
+            heroTag: 'addStudent',
             backgroundColor: ColorsManager.moreLighterGray,
             onPressed: () {
               _addStudent(context);
@@ -101,6 +103,7 @@ class StudentView extends StatelessWidget {
           ),
 
           FloatingActionButton.extended(
+            heroTag: 'addLesson',
             backgroundColor: ColorsManager.moreLighterGray,
             onPressed: () {
               _addLesson(context);
@@ -121,22 +124,20 @@ class StudentView extends StatelessWidget {
       ),
       body: Container(
         width: double.infinity,
+        height: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
 
         child: Column(
           spacing: 20.h,
           children: [
-            Flexible(child: TeacherBuilderWidget()),
+            TeacherBuilderWidget(),
             Divider(color: ColorsManager.darkBlue, thickness: 1),
-            Flexible(
-              child: LessonBuilderWidget(
-                instituteId: instituteId,
-                centerId: centerId,
-                roomId: roomId,
-              ),
+            LessonBuilderWidget(
+              instituteId: instituteId,
+              centerId: centerId,
+              roomId: roomId,
             ),
-            Divider(color: ColorsManager.darkBlue, thickness: 1),
-            Flexible(child: StudentBuilderWidget()),
+            StudentBuilderWidget(),
           ],
         ),
       ),

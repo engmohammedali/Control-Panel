@@ -1,5 +1,4 @@
 import 'package:controlpanel/core/theming/colors.dart';
-import 'package:controlpanel/features/rooms/data/model/room.dart';
 import 'package:controlpanel/features/rooms/logic/room_cubit.dart';
 import 'package:controlpanel/features/rooms/view/widgets/add_room_widget.dart';
 import 'package:controlpanel/features/rooms/view/widgets/room_builder_widget.dart';
@@ -57,9 +56,13 @@ class _RoomsViewState extends State<RoomsView> {
         width: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
 
-        child: RoomBuilderWidget(
-          centerId: widget.centerId,
-          instituteId: widget.instituteId,
+        child: Column(
+          children: [
+            RoomBuilderWidget(
+              centerId: widget.centerId,
+              instituteId: widget.instituteId,
+            ),
+          ],
         ),
       ),
     );

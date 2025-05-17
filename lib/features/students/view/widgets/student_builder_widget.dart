@@ -36,7 +36,7 @@ class StudentBuilderWidget extends StatelessWidget {
   }
 
   Widget setUpSuccess(List<Student> students) {
-    return Flexible(
+    return Expanded(
       child: ListView.builder(
         itemCount: students.length,
         itemBuilder:

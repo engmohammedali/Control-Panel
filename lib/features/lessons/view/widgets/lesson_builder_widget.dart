@@ -49,7 +49,7 @@ class LessonBuilderWidget extends StatelessWidget {
     if (lessons.isEmpty) {
       return const Center(child: Text("No lesson added"));
     }
-    return Flexible(
+    return Expanded(
       child: ListView.builder(
         itemCount: lessons.length,
         itemBuilder:
